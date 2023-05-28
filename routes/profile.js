@@ -1,15 +1,10 @@
-const express = require('express')
-const router = express.Router()
-const schemas = require('../models/schemas')
+const express = require('express');
+const router = express.Router();
+const schemas = require('../models/schemas');
+const { getProfile, addProfileInfo, updateProfileInfo } = require('../controllers/profileController');
 
-router.get('/', async (req, res) => {
-  const meta = schemas.Meta
-  const data = await meta.find({}).exec()
-  if (data) 
-    res.end(JSON.stringify(data))
-  else res.end("Something went wrong!")
+router.get('/', getProfile);
+router.post('/', addProfileInfo);
+router.patch('/', updateProfileInfo);
 
-  res.send(data)
-})
-
-module.exports = router
+module.exports = router;
